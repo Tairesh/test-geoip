@@ -43,6 +43,9 @@ $config = [
 	    ],
 	],
 	'db' => $db,
+	'freegeoip' => [
+	    'class' => 'app\components\FreeGeoIp',
+	],
 	'urlManager' => [
 	    'enablePrettyUrl' => true,
 	    'showScriptName' => false,

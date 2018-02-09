@@ -5,7 +5,8 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
-use app\components\JsonErrorAction;
+use app\actions\JsonErrorAction;
+use app\models\GeoIp;
 
 class SiteController extends Controller
 {
@@ -30,7 +31,20 @@ class SiteController extends Controller
     public function actionQuery($ip)
     {
 	Yii::$app->response->format = Response::FORMAT_JSON;
-	return [];
+	$model = new GeoIp([
+	    'ip' => $ip,
+	]);
+	$data = [];
+	if (!$model->validate()) {
+	    Yii::$app->response->setStatusCode(400);
+	} else {
+	    $data = $model->getData();
+	    if (empty($data)) {
+		Yii::$app->response->setStatusCode(404);
+	    }
+	}
+
+	return $data;
     }
 
 }
