@@ -60,3 +60,13 @@ return [
     'database' => 0,
 ];
 ```
+
+
+USING
+-----
+
+Example request, implying %api% is URL of Yii enter point:
+```GET %api%/ip2geo?ip=94.140.141.95
+Response:
+["country": "Russia", "city": "Yekaterinburg", "latitude": 56.8389261, "longitude": 60.6057025]
+```
